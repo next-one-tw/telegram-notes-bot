@@ -1,32 +1,96 @@
-# If you prefer the allow list template instead of the deny list, see community template:
-# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
-#
-# Binaries for programs and plugins
+# Если создаете репозиторий через UI GitHub - выбирайте шаблон Go.
+# Ниже приведено детальное описание того, что должно быть в этом файле.
+
+### Компилированные бинарные файлы ###
+# В Go нет стандартного места для бинарников, но часто используют эти папки
+bin/
+build/
+dist/
+output/
+
+# Бинарные файлы по расширениям (важно для Windows)
 *.exe
 *.exe~
 *.dll
 *.so
 *.dylib
 
-# Test binary, built with `go test -c`
+### Тестовые файлы ###
+# Тестовые бинарники и отчеты о покрытии
 *.test
-
-# Code coverage profiles and other test artifacts
 *.out
-coverage.*
-*.coverprofile
-profile.cov
+coverage.out
+race.out
+profile.out
+*.prof
 
-# Dependency directories (remove the comment below to include it)
-# vendor/
+### Зависимости ###
+# Vendor папка (традиционный способ управления зависимостями - сейчас редкость)
+/vendor/
 
-# Go workspace file
+# Кэш модулей (не путать с go.sum, который НУЖНО коммитить!)
+# go.sum - коммитим, это часть модуля
+# А вот кэш модулей - НЕ коммитим
+/pkg/mod/
+**/go-mod-cache/
+
+### Локальные конфигурации ###
+# Файлы окружения с секретами (НИКОГДА не коммитить!)
+.env
+.env.local
+.env.production
+
+# Локальные конфигурации приложения
+config.local.yaml
+config.local.toml
+config.local.json
+
+### IDE и редакторы ###
+# VS Code
+.vscode/
+*.code-workspace
+
+# GoLand / IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Vim
+*.swp
+*.swo
+*~
+._*
+
+# VS Code Go extension specific
+**/go-build-cache/
+
+### Логи и временные файлы ###
+*.log
+tmp/
+temp/
+**/tmp/
+
+### OS generated files ###
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+### Go modules work files ###
+# go.work - для multi-module разработки (только локально!)
 go.work
 go.work.sum
 
-# env file
-.env
+### Дополнительно для Go ###
+# Файлы отладки
+debug
+debug.test
 
-# Editor/IDE
-# .idea/
-# .vscode/
+# Профайлинг
+cpu.pprof
+mem.pprof
